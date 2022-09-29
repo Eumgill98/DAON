@@ -12,17 +12,22 @@
            li {
                 font-size:18px;
            }
+           header {
+                position: sticky;
+                top: 0;
+                z-index: 1;
+           }
         </style>
     </head>
     <body>
         <header class="p-3 bg-success bg-opacity-50 text-white">
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"><img src="static/map/daon.png" width="60"></a>
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"><img src="/static/map/daon.png" width="60"></a>
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                      <li><a href="#" class="nav-link px-2 text-secondary">홈</a></li>
-                      <li><a href="#" class="nav-link px-2 text-white">추천</a></li>
-                      <li><a href="#" class="nav-link px-2 text-white">공고작성</a></li>
+                      <li><a href=" " class="nav-link px-2 text-secondary">홈</a></li>
+                      <li><a href="/recomand" class="nav-link px-2 text-white">추천</a></li>
+                      <li><a href="/make" class="nav-link px-2 text-white">공고작성</a></li>
                     </ul>
                     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                       <input type="search" class="form-control form-control-dark" placeholder="지원 검색..." aria-label="Search">
@@ -113,7 +118,11 @@
                 </div>
                 <div class="col" style="width: 45%;">
                     <div class="my-2 p-1 bg-body rounded shadow-lg">
+                        <div id ='map'>
+                            <h4 style="position: relative; left:38%;">지역별 지원정책</h4>
+                            {{map|safe}}
 
+                        </div>
                     </div>
                 </div>
             </div>
