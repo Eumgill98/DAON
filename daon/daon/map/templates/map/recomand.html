@@ -89,28 +89,34 @@
             <div class="recomand_box" style="overflow:auto">
                 <h4>맞춤형 추천 지원정책</h4>
                 <hr>
-                {% autoescape off %}
-                {{ dataframe }}
-                {% endautoescape %}
+                <table class="table">
+                    <tr>
+                        <th>지원정책</th>
+                        <th>지자체</th>
+                    </tr>
 
+                    <tbody id = "table1">
 
+                    </tbody>
+                </table>
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div class="recomand_box">
                 <div class="hash_tag">
                     <h4>#복지 해시태그</h4>
                     <hr>
-                    <button type="button" class="btn btn-outline-primary">#청년</button>
-                    <button type="button" class="btn btn-outline-secondary">#유아 및 출산</button>
-                    <button type="button" class="btn btn-outline-success">#노인</button>
-                    <button type="button" class="btn btn-outline-danger">#창업</button>
-                    <br>
-                    <button type="button" class="btn btn-outline-warning">Hashtag</button>
-                    <button type="button" class="btn btn-outline-info">Hashtag</button>
-                    <button type="button" class="btn btn-outline-dark">Hashtag</button>
+                    <form method="get" action="/recomand/" id="optionForm">
+                        <button name="hash" type="submit" form="optionForm" class="btn btn-outline-primary" value="청년">#청년</button>
+                        <button name="hash" type="submit" form="optionForm" class="btn btn-outline-secondary" value="저출산">#출산 및 육아</button>
+                        <button name="hash" type="submit" form="optionForm" class="btn btn-outline-success" value="노인">#노인</button>
+                        <br>
+                        <button name="hash" type="submit" form="optionForm" class="btn btn-outline-danger" value="결혼">#결혼</button>
+                        <button name="hash" type="submit" form="optionForm" class="btn btn-outline-warning" value="저소득">#저소득</button>
+                        <button name="hash" type="submit" form="optionForm" class="btn btn-outline-info" value="주거">#주거</button>
+                    </form>
                 </div>
                 &nbsp;&nbsp;&nbsp;
-                <h4>필요한 정책요구사항</h4>
+                <h4>필요한 정책</h4>
                 <hr>
                 <div class="input-group">
                     <span class="input-group-text">정책<br> 요구사항:</span>
@@ -121,4 +127,24 @@
         </div>
 
     </body>
+<script>
+var dataframe =  {{dataframe|safe}}
+
+buildTable(dataframe)
+console.log(dataframe)
+
+function buildTable(data) {
+        var table = document.getElementById('table1')
+
+        for (var i=0; i < data.length; i++)
+        {
+            var row = `<tr>
+                <td style="cursor:pointer;" onClick="window.open('${data[i].URL}', '', '');">${data[i].사업명}</td>
+                <td style="cursor:pointer;" onClick="window.open('${data[i].URL}', '', '');">${data[i].지역}</td>
+                </tr>`
+            table.innerHTML += row
+        }
+    }
+</script>
+
 </html>

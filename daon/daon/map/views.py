@@ -11,6 +11,7 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+property_list = ["hash"]
 
 
 
@@ -28,19 +29,27 @@ def main(request):
 
     return render(request, 'map/main.html', db)
 
-def recomand(requset):
+def recomand(request):
     db = {}
-    ori_data, html_code =read_data()
+    ori_data, df =read_data()
+    df = df.to_dict('records')
 
-    db['dataframe'] = html_code
+    if request.method == 'GET':  # GET 메소드로 값이 넘어 왔다면,
+        for key in property_list:
+            # 값이 넘어 오지 않았다면 "", 값이 넘어 왔다면 해당하는 값을 db에 넣어줌
+            db[f"{key}"] = request.GET[f"{key}"] if request.GET.get(f"{key}") else ""  # 삼항 연산자
+
+    db['dataframe'] = df
     db['ori_data'] = ori_data
+    print(df['hash'])
 
 
-    return  render(requset, 'map/recomand.html', db)
 
-def make(requset):
+    return  render(request, 'map/recomand.html', db)
 
-    return render(requset, 'map/make.html')
+def make(request):
+
+    return render(request, 'map/make.html')
 
 
 ##불러오기 기능
@@ -50,8 +59,8 @@ def read_data():
     df=pd.DataFrame()
     df['사업명']=data['사업명']
     df['지역']=data['지자체']
-    html_DataFrame = df.to_html(justify='center', index=False, classes="table")
-    return(data, html_DataFrame)
+    df['URL']=data['URL']
+    return(data, df)
 
 def read_category():
     index_1 = [3,27,14]
