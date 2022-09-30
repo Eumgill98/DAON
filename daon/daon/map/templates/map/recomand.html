@@ -9,14 +9,52 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <title>DAON</title>
         <style>
+           body{
+                height: 100vh;
+                width: 100vw;
+           }
            li {
                 font-size:18px;
            }
+
+           hr{
+                width:80%;
+                margin-left : auto;
+                margin-right : auto;
+           }
+
+           .btn{
+                margin: 0.25rem 0.125rem;
+                    margin-top: 0.25rem;
+                    margin-right: 0.125rem;
+                    margin-bottom: 0.25rem;
+                    margin-left: 0.125rem;
+           }
+
            header {
                 position: sticky;
                 top: 0;
                 z-index: 1;
            }
+           .main{
+                display:flex;
+                justify-content: center;
+                height: 100%
+
+           }
+           .recomand_box{
+                position:relative;
+                width:40%;
+                height: 80%;
+                justify-content: center;
+                text-align: center;
+                border:1px solid 255,255,255;
+                border-radius:10px;
+                background-color: white;
+                padding:1rem;
+                box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+           }
+
         </style>
     </head>
     <body>
@@ -46,20 +84,41 @@
                 </div>
             </div>
         </header>
-        <br>
-        <main class="container-md" >
-            <div class="row">
-                <div class="col" style="width: 45%;">
-                    <div class="my-2 p-1 bg-body rounded ">
-                        <div class="my-3 p-3 bg-body rounded shadow-sm">
-                            <h4>맞춤형 추천 지원정책들</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" style="width: 45%;">
-                </div>
+        &nbsp;&nbsp;&nbsp;
+        <div class="main" >
+            <div class="recomand_box" style="overflow:auto">
+                <h4>맞춤형 추천 지원정책</h4>
+                <hr>
+                {% autoescape off %}
+                {{ dataframe }}
+                {% endautoescape %}
+
+
             </div>
-        </main>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="recomand_box">
+                <div class="hash_tag">
+                    <h4>#복지 해시태그</h4>
+                    <hr>
+                    <button type="button" class="btn btn-outline-primary">#청년</button>
+                    <button type="button" class="btn btn-outline-secondary">#유아 및 출산</button>
+                    <button type="button" class="btn btn-outline-success">#노인</button>
+                    <button type="button" class="btn btn-outline-danger">#창업</button>
+                    <br>
+                    <button type="button" class="btn btn-outline-warning">Hashtag</button>
+                    <button type="button" class="btn btn-outline-info">Hashtag</button>
+                    <button type="button" class="btn btn-outline-dark">Hashtag</button>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <h4>필요한 정책요구사항</h4>
+                <hr>
+                <div class="input-group">
+                    <span class="input-group-text">정책<br> 요구사항:</span>
+                    <textarea class="form-control" aria-label="wanted_policy"></textarea>
+                </div>
+                <button type="submit" value="Submit" class="btn btn-outline-secondary btn-lg" style="margin: 3% 0;">제출</button>
+            </div>
+        </div>
 
     </body>
 </html>
